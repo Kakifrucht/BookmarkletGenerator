@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encrypted Content</title>
+</head>
+
+<body>
+  <div id="main" class="container">
+    <div id="content-container" class="hidden">
+      <div class="flex items-center">
+        <h1 class="content">Decrypted Message</h1>
+        <div class="relative ml-4">
+          <button id="copy-button" class="tooltip-trigger">
+            <img id="copy-icon" class="tooltip-img" src="" alt="Copy">
+          </button>
+          <div class="tooltip">
+            Copy to clipboard
+          </div>
+        </div>
+        <div class="relative ml-2">
+          <a id="open-generator-button" href="" class="tooltip-trigger hidden">
+            <img id="generator-icon" class="tooltip-img" src="" alt="Open Generator">
+          </a>
+          <div class="tooltip">
+            Open generator
+          </div>
+        </div>
+      </div>
+      <p id="content"></p>
+    </div>
+    <div id="prompt-container">
+      <div id="prompt">
+        <input type="password" id="password" autofocus placeholder="Enter password" />
+        <button id="submit" class="submit-button">Decrypt</button>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

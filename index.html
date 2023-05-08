@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Encrypted Bookmarklet Generator</title>
+  <link rel="icon" href="svg/favicon.svg">
+  <link rel="stylesheet" href="css/tailwind.min.css">
+  <link rel="stylesheet" href="css/generator-custom.min.css">
+  <script src="lib/aes-lib.js"></script>
+  <script src="lib/forge-sha256.js"></script>
+  <script src="lib/fflate.min.js"></script>
+  <script src="lib/terser.js"></script>
+  <script src="generator.js"></script>
+</head>
+
+<body class="bg-gray-100 px-4 sm:px-6 lg:px-8 py-8">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl sm:text-4xl font-bold mb-8">Encrypted Bookmarklet Generator</h1>
+    <p class="mb-4">
+      Enter a link or any text (Markdown formatting supported) along with a password to
+      generate a secure, encrypted bookmarklet.
+    </p>
+    <form id="content-form">
+      <div class="flex flex-col sm:flex-row my-2">
+        <input type="text" id="content" placeholder="Enter link or text, double click to expand" autofocus required autocomplete="off"
+          class="border border-gray-300 rounded p-2 mb-2 sm:mr-2 sm:w-1/2 w-full" />
+        <div class="flex flex-wrap sm:flex-nowrap">
+          <input type="password" id="password" placeholder="Enter password"
+            class="border border-gray-300 rounded p-2 mb-2 w-full" />
+          <button id="generate" type="submit"
+            class="bg-blue-500 text-white sm:ml-2 px-4 py-2 mb-2 rounded hover:bg-blue-600 transition duration-200 w-full flex-1 whitespace-nowrap">
+            Generate Bookmarklet
+          </button>
+        </div>
+    </form>
+  </div>
+  <p class="flex items-center justify-center md:justify-start md:items-start">
+    <a id="bookmarklet-link" href="#" download="bookmarklet.html"
+      title="Click to copy to clipboard or drag into your bookmarks"
+      class="url-hidden bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200 inline-flex shadow-lg font-semibold">
+      <img src="svg/bookmark-icon.svg" alt="" class="w-6 h-6 ml-auto mr-1 -ml-1 inline-block" />Generated Bookmarklet
+    </a>
+  <p id="warning" class="hidden text-red-600 mt-2"></p>
+  </p>
+  </div>
+</body>
+
+</html>
