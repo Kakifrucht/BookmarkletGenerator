@@ -4,7 +4,7 @@ Small and user-friendly tool that enables the creation of encrypted bookmarklets
 
 Direct URL opening is available for decrypting single links.
 
-## Key Features
+## Features
 
 - Employs AES-256 encryption for creating encrypted bookmarklets
 - Supports markdown-formatted text

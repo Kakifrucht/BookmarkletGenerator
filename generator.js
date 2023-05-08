@@ -137,7 +137,7 @@ async function generateBookmarklet() {
     appendChild(bookmarkletHead, faviconElement);
 
     bookmarkletParsed.getElementById('copy-icon').src = await getSvgDataUrl('svg/copy-icon.svg');
-    bookmarkletParsed.getElementById('generator-icon').src = await getSvgDataUrl('svg/bookmark-icon-black.svg');
+    bookmarkletParsed.getElementById('generator-icon').src = await getSvgDataUrl('svg/generator-icon.svg');
 
     appendChild(bookmarkletHead, await getCssElement('bookmarklet.min.css'));
     appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('decrypt.js'));
