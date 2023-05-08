@@ -34,12 +34,15 @@ Bookmark size limitations vary across browsers, with Firefox (version 112) havin
 
 ## Dependencies
 
-- [aes-lib-js](https://github.com/kyleruss/aes-lib-js) for AES-256 in CBC mode
-  - [Forge's SHA-256 implementation](https://github.com/brillout/forge-sha256) for key derivation and data integrity verification
-- [fflate](https://github.com/101arrowz/fflate) for compression on the generator side
-  - [tiny-inflate](https://github.com/foliojs/tiny-inflate) for decompression on the bookmarklet side
-- [terser](https://github.com/terser/terser) for JavaScript minification during generation
-- [Snarkdown](https://github.com/developit/snarkdown) for Markdown parsing
+Dependencies and their licenses are included in the ``lib`` directory.
+
+- [aes-lib-js](https://github.com/kyleruss/aes-lib-js) for AES-256 in CBC mode.
+  - [Forge's SHA-256 implementation](https://github.com/brillout/forge-sha256) for key derivation and data integrity verification.
+- [fflate](https://github.com/101arrowz/fflate) for compression on the generator side.
+  - [tiny-inflate](https://github.com/foliojs/tiny-inflate) for decompression on the bookmarklet side.
+- [terser](https://github.com/terser/terser) for JavaScript minification during generation.
+- [Snarkdown](https://github.com/developit/snarkdown) for Markdown parsing.
+- [tailwindcss](https://github.com/tailwindlabs/tailwindcss) for generator styling.
 
 ## License
 
