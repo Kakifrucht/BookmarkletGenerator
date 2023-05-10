@@ -103,19 +103,25 @@ function parseSimple(str) {
     return clickableText;
 }
 
+function setPromptMessage(el, title, message, isError = false) {
+    const cssClass = isError ? 'error-message' : 'prompt-message';
+    el.innerHTML = `<h1 class="prompt-title">${title}</h1><p class="${cssClass}">${message}</p>`;
+}
+
 function handleIncorrectPassword(promptElement) {
     const originalInner = promptElement.innerHTML;
-    promptElement.innerHTML = '<h1 class="error-title">Incorrect Password</h1><p class="error-message">Press Enter or tap anywhere to try again.</p>';
-    setTimeout(() => {
-        function handleClickOrEnter(event) {
-            if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
-                promptElement.innerHTML = originalInner;
-                registerListeners();
-                document.getElementById('password').focus();
-                document.removeEventListener('click', handleClickOrEnter);
-                document.removeEventListener('keydown', handleClickOrEnter);
-            }
+    setPromptMessage(promptElement, 'Incorrect Password', 'Press Enter or tap anywhere to try again.', true);
+    function handleClickOrEnter(event) {
+        if (event.type === 'click' || (event.type === 'keydown' && event.key === 'Enter')) {
+            promptElement.innerHTML = originalInner;
+            registerListeners();
+            document.getElementById('password').focus();
+            document.removeEventListener('click', handleClickOrEnter);
+            document.removeEventListener('keydown', handleClickOrEnter);
         }
+    }
+
+    setTimeout(() => {    
         document.addEventListener('click', handleClickOrEnter);
         document.addEventListener('keydown', handleClickOrEnter);
     }, 1);
@@ -124,14 +130,14 @@ function handleIncorrectPassword(promptElement) {
 let decryptedString;
 function decryptAndOpen() {
     const password = document.getElementById('password').value;
+    const promptElement = document.getElementById('prompt-container');
     try {
         decryptedString = decrypt(password);
     } catch (error) {
-        const promptElement = document.getElementById('prompt-container');
         if (error.message === 'Incorrect password') {
             handleIncorrectPassword(promptElement);
         } else {
-            promptElement.innerHTML = '<h1 class="error-title">Unknown Error</h1><p class="error-message">Check the console for details.</p>';
+            setPromptMessage(promptElement, 'Unknown Error', 'Check the console for details.', true);
             console.log("Unknown problem: ", error);
         }
         return;
@@ -143,6 +149,8 @@ function decryptAndOpen() {
 
     if (isValidURL(decryptedString)) {
         window.location.href = decryptedString;
+        const linkShort = decryptedString.length > 50 ? decryptedString.slice(0, 50) + "..." : decryptedString;
+        setPromptMessage(promptElement, 'Opening Link', `Redirecting to <a href="${decryptedString}">${linkShort}</a>`);
         return;
     } 
 
@@ -180,5 +188,5 @@ function registerListeners() {
 
 window.onload = () => {
     registerListeners();
-    console.log('Use unlock("password") to copy your decrypted data from console');
+    console.log('Use unlock("password") to print your decrypted data to console');
 }

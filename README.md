@@ -1,19 +1,22 @@
 # Encrypted Bookmarklet Generator
 
-Small and user-friendly tool that enables the creation of encrypted bookmarklets with AES-256 encryption. Users can input various data types, such as text or markdown-formatted content, along with a password. The tool generates a data URL containing encrypted data and all required libraries for decryption. Data is compressed if the overhead of adding the decompression library is less than when uncompressed.
+Small and user-friendly tool that enables the creation of AES-256 encrypted bookmarklets. It allows users to input text, optionally formatted in markdown, or a URL, paired with a password. This tool then generates a data URL, which includes the encrypted data and all necessary decryption libraries. The generated URL can be saved as a bookmark and synchronized across devices through your browser's data sync feature.
 
-Direct URL opening is available for decrypting single links.
+For efficiency, data compression is implemented when the overhead of adding the decompression library is lower than the uncompressed state.
+
+Additionally, the tool offers the functionality of opening direct URLs, providing a straightforward way to decrypt individual links.
 
 ## Features
 
-- Employs AES-256 encryption for creating encrypted bookmarklets
-- Supports markdown-formatted text
-- Directly opens single encrypted links
-- Embeds all necessary dependencies within the bookmarklet
-- Compresses data using deflate if it is smaller with the inflate library included in the bookmarklet
-- Enables editing by copying decrypted data to the clipboard and following the convenient link to the generator
-- Offers dark and light mode according to browser preferences, and is responsive
-- Includes a favicon
+- Employs AES-256 encryption for creating encrypted bookmarklets.
+- Supports markdown-formatted text.
+- Directly opens single encrypted links.
+- Embeds all necessary dependencies within the bookmarklet.
+- Fully client side, runs on a basic webserver.
+- Compresses data using deflate if it is smaller with the inflate library included in the bookmarklet.
+- Enables editing by copying decrypted data to the clipboard and following the convenient link to the generator within the bookmarklet.
+- Offers dark and light mode according to browser preferences, and is responsive.
+- Includes a favicon, wow.
 
 ## How to Use
 
@@ -24,13 +27,13 @@ You can find a hosted version [here](https://wunderlich.pw/bookmarklet-generator
 3. Open `index.html` in a web browser.
 4. Input your data (text, markdown, or a single link) and a password, then click "Generate Bookmarklet" to create an encrypted bookmarklet.
 5. Copy the generated bookmarklet by clicking the "Generated Bookmarklet" button that appears, or right-click and copy manually. Alternatively, drag this button to your bookmarks bar.
-6. To decrypt your bookmarklet, open it in your browser and input the same password.
+6. To decrypt your bookmarklet, open it in your browser and input your password.
 
 ## Constraints
 
-Since this tool operates in an unsecured context from a data URL, the browser's ``crypto.subtle`` API cannot be used. Instead, [aes-lib-js](https://github.com/kyleruss/aes-lib-js) and [forge-sha256](https://github.com/brillout/forge-sha256) are utilized for data encryption and key derivation.
+Since this tool operates in an unsecured context from a data URL, the browser's ``crypto.subtle`` API cannot be used. Instead, [aes-lib-js](https://github.com/kyleruss/aes-lib-js) and [forge-sha256](https://github.com/brillout/forge-sha256) are utilized for data encryption and key derivation. These libraries were chosen because they were the smallest (non-gzipped) implementations I could find.
 
-Bookmark size limitations vary across browsers, with Firefox (version 112) having a maximum of 64KB. Chrome and Edge do not appear to have this limitation. The minimum data size for a bookmarklet is approximately 38KB, allowing for encryption of 26KB minus base64 encoding overhead when size restricted.
+Bookmark size limitations vary across browsers, with Firefox (version 112) having a maximum of 64KB. Chrome and Edge do not appear to have this limitation. The minimum data size for a bookmarklet is approximately 38KB, allowing for encryption of 26KB (minus base64 encoding overhead) when size restricted.
 
 ## Dependencies
 

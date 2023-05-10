@@ -119,6 +119,7 @@ function appendChild(e, toAppend) {
 async function generateBookmarklet() {
     let content = document.getElementById('content').value;
     if (content.length === 0) return;
+
     const buttonElement = document.getElementById('generate');
     const buttonPreviousClasses = buttonElement.className;
     buttonElement.className = 'bg-black text-white opacity-50 cursor-not-allowed sm:ml-2 px-4 py-2 mb-2 rounded w-full flex-1 whitespace-nowrap';
@@ -135,7 +136,6 @@ async function generateBookmarklet() {
     faviconElement.rel = 'icon';
     faviconElement.href = await getSvgDataUrl('svg/favicon.svg');
     appendChild(bookmarkletHead, faviconElement);
-
     bookmarkletParsed.getElementById('copy-icon').src = await getSvgDataUrl('svg/copy-icon.svg');
     bookmarkletParsed.getElementById('generator-icon').src = await getSvgDataUrl('svg/generator-icon.svg');
 
