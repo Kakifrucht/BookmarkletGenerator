@@ -131,6 +131,7 @@ async function generateBookmarklet() {
     const bookmarkletParsed = new DOMParser().parseFromString(bookmarkletTemplate, 'text/html');
     const bookmarkletHead = bookmarkletParsed.head;
     bookmarkletParsed.getElementById('open-generator-button').href = window.location.href;
+    bookmarkletParsed.getElementById('back-to-generator').href = window.location.href;
 
     const faviconElement = document.createElement('link');
     faviconElement.rel = 'icon';

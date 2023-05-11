@@ -2,8 +2,7 @@
 
 Small and user-friendly tool that enables the creation of AES-256 encrypted bookmarklets. It allows users to input text, optionally formatted in markdown, or a URL, paired with a password. This tool then generates a data URL, which includes the encrypted data and all necessary decryption libraries. The generated URL can be saved as a bookmark and synchronized across devices through your browser's data sync feature.
 
-For efficiency, data compression is implemented when the overhead of adding the decompression library is lower than the uncompressed state.
-
+For efficiency, data is compressed when the overhead of adding the decompression library is lower than the uncompressed state.  
 Additionally, the tool offers the functionality of opening direct URLs, providing a straightforward way to decrypt individual links.
 
 ## Features
@@ -12,7 +11,7 @@ Additionally, the tool offers the functionality of opening direct URLs, providin
 - Supports markdown-formatted text.
 - Directly opens single encrypted links.
 - Embeds all necessary dependencies within the bookmarklet.
-- Fully client side, runs on a basic webserver.
+- Fully client side, generator runs on a basic webserver.
 - Compresses data using deflate if it is smaller with the inflate library included in the bookmarklet.
 - Enables editing by copying decrypted data to the clipboard and following the convenient link to the generator within the bookmarklet.
 - Offers dark and light mode according to browser preferences, and is responsive.
