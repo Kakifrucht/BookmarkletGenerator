@@ -34,6 +34,8 @@ Since this tool operates in an unsecured context from a data URL, the browser's 
 
 Bookmark size limitations vary across browsers, with Firefox (version 112) having a maximum of 64KB. Chrome and Edge do not appear to have this limitation. The minimum data size for a bookmarklet is approximately 38KB, allowing for encryption of 26KB (minus base64 encoding overhead) when size restricted.
 
+To insert binary encrypted data into a data URL, it has to go through base64 encoding twice. The first round of encoding converts the binary data to a string for the bookmarklet template, while the second round is for creating a data URL from the full page, which increases its size by about 1.8 times. If compression is utilized, there will be an extra step of base64 encoding before the data gets encrypted. However, this added overhead is considered when deciding to use compression.
+
 ## Dependencies
 
 Dependencies and their licenses are included in the ``lib`` directory.

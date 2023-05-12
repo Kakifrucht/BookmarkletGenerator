@@ -79,9 +79,15 @@ h1.content {
     font-weight: 600;
     margin-top: 0;
     margin-bottom: 1rem;
+    text-align: center;
+}
+
+.prompt-message {
+    text-align: center;
 }
 
 .error-message {
+    text-align: center;
     color: #DC2626;
 }
 
@@ -125,7 +131,7 @@ h1.content {
 
 input[type="password"],
 .submit-button {
-    border: 1px solid #D1D5DB;
+    border: 1px solid #dadada;
     padding: 0.7rem;
     width: auto;
     box-sizing: border-box;
@@ -133,7 +139,8 @@ input[type="password"],
 }
 
 input[type="password"]:focus {
-    border: 2px solid black;
+    border: 1px solid black;
+    box-shadow: 0 0 0 1px black;
 }
 
 .submit-button {

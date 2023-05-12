@@ -20,7 +20,8 @@
     <h1 class="text-3xl sm:text-4xl font-bold mb-8">Encrypted Bookmarklet Generator</h1>
     <p class="mb-4">
       Enter a link or any text (Markdown formatting supported) along with a password to
-      generate a secure, encrypted bookmarklet.
+      generate a secure, encrypted bookmarklet.<br>You can find more information on 
+      <a href="https://github.com/Kakifrucht/BookmarkletGenerator" class="text-blue-500 hover:text-blue-600">GitHub</a>.
     </p>
     <form id="content-form">
       <div class="flex flex-col sm:flex-row my-2">
@@ -34,16 +35,16 @@
             Generate Bookmarklet
           </button>
         </div>
+      </div>
     </form>
-  </div>
-  <p class="flex items-center justify-center md:justify-start md:items-start">
-    <a id="bookmarklet-link" href="#" download="bookmarklet.html"
-      title="Click to copy to clipboard or drag into your bookmarks"
-      class="url-hidden bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200 inline-flex shadow-lg font-semibold">
-      <img src="svg/bookmark-icon.svg" alt="" class="w-6 h-6 ml-auto mr-1 -ml-1 inline-block" />Generated Bookmarklet
-    </a>
-  <p id="warning" class="hidden text-red-600 mt-2"></p>
-  </p>
+    <div class="flex items-center justify-center md:justify-start md:items-start">
+      <a id="bookmarklet-link" href="#" download="bookmarklet.html"
+        title="Click to copy to clipboard or drag into your bookmarks"
+        class="url-hidden bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-200 inline-flex shadow-lg font-semibold">
+        <img src="svg/bookmark-icon.svg" alt="" class="w-6 h-6 ml-auto mr-1 -ml-1 inline-block" />Generated Bookmarklet
+      </a>
+      <p id="warning" class="hidden text-red-600 mt-2"></p>
+    </div>
   </div>
 </body>
 
