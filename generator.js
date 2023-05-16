@@ -156,8 +156,7 @@ async function generateBookmarklet() {
     const b64CompressedDataSize = compressedData.byteLength * 4 / 3;
     const useCompression = b64CompressedDataSize + fflate.strToU8(inflateScript).byteLength < u8Content.byteLength;
     if (useCompression) {
-        const inflateScriptElement = getScriptElement(inflateScript);
-        appendChild(bookmarkletHead, inflateScriptElement);
+        appendChild(bookmarkletHead, getScriptElement(inflateScript));
         const header = {
             uncompressedSize: u8Content.byteLength,
             compressedData: arrayBufferToBase64(compressedData)
@@ -170,7 +169,7 @@ async function generateBookmarklet() {
 
     const bookmarkletString = new XMLSerializer().serializeToString(bookmarkletParsed);
     const bookmarkletStringHTML = decodeHtmlEntities(bookmarkletString).replace('{{encryptedData}}', encryptedString);
-    const encodedFinalBookmarklet = btoa(bookmarkletStringHTML);
+    const encodedFinalBookmarklet = window.btoa(bookmarkletStringHTML);
     const dataURL = `data:text/html;base64,${encodedFinalBookmarklet}`;
 
     const bookmarkletLink = document.getElementById('bookmarklet-link');

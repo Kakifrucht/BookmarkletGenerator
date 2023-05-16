@@ -1,20 +1,21 @@
 # Encrypted Bookmarklet Generator
 
-Small and user-friendly tool that enables the creation of AES-256 encrypted bookmarklets. It allows users to input text, optionally formatted in markdown, or a URL, paired with a password. This tool then generates a data URL, which includes the encrypted data and all necessary decryption libraries. The generated URL can be saved as a bookmark and synchronized across devices through your browser's data sync feature.
+Small and user-friendly tool that enables the creation of AES-256 encrypted data URL [bookmarklets](https://en.wikipedia.org/wiki/Bookmarklet). It allows users to input text, optionally formatted in markdown, or a URL, paired with a password. This tool then generates a data URL, which includes the encrypted data and all necessary decryption libraries. The generated URL can be saved as a bookmark and synchronized across devices through your browser's data sync feature.
 
 For efficiency, data is compressed when the overhead of adding the decompression library is lower than the uncompressed state.  
 Additionally, the tool offers the functionality of opening direct URLs, providing a straightforward way to decrypt individual links.
 
 ## Features
 
-- Employs AES-256 encryption for creating encrypted bookmarklets.
-- Supports markdown-formatted text.
+- Uses AES-256 encryption to create data URL bookmarklets with your encrypted link/text.
+- Supports markdown-formatted text, useful for notes.
 - Directly opens single encrypted links.
 - Embeds all necessary dependencies within the bookmarklet.
 - Fully client side, generator runs on a basic webserver.
 - Compresses data using deflate if it is smaller with the inflate library included in the bookmarklet.
 - Enables editing by copying decrypted data to the clipboard and following the convenient link to the generator within the bookmarklet.
 - Offers dark and light mode according to browser preferences, and is responsive.
+- Custom tab title if the first line of the data is a heading, useful for tab hoarders and temporary notes.
 - Includes a favicon, wow.
 
 ## How to Use
@@ -32,7 +33,7 @@ You can find a hosted version [here](https://wunderlich.pw/bookmarklet-generator
 
 Since this tool operates in an unsecured context from a data URL, the browser's ``crypto.subtle`` API cannot be used. Instead, [aes-lib-js](https://github.com/kyleruss/aes-lib-js) and [forge-sha256](https://github.com/brillout/forge-sha256) are utilized for data encryption and key derivation. These libraries were chosen because they were the smallest (non-gzipped) implementations I could find.
 
-Bookmark size limitations vary across browsers, with Firefox (version 112) having a maximum of 64KB. Chrome and Edge do not appear to have this limitation. The minimum data size for a bookmarklet is approximately 38KB, allowing for encryption of 26KB (minus base64 encoding overhead) when size restricted.
+Bookmark size limitations vary across browsers, with Firefox (version 112) having a maximum of 64KB. Chrome and Edge do not appear to have this limitation. The minimum data size for a bookmarklet is approximately 39KB, allowing for encryption of 25KB (minus base64 encoding overhead) when size restricted.
 
 To insert binary encrypted data into a data URL, it has to go through base64 encoding twice. The first round of encoding converts the binary data to a string for the bookmarklet template, while the second round is for creating a data URL from the full page, which increases its size by about 1.8 times. If compression is utilized, there will be an extra step of base64 encoding before the data gets encrypted. However, this added overhead is considered when deciding to use compression.
 
