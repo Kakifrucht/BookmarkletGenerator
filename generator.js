@@ -1,11 +1,3 @@
-function deriveKey(password, salt, iterations = 10000) {
-    let hashedPassword = password + salt;
-    for (let i = 0; i < iterations; i++) {
-        hashedPassword = forge_sha256(hashedPassword);
-    }
-    return hashedPassword;
-}
-
 function generateRandomIV() {
     const array = new Uint8Array(8);
     crypto.getRandomValues(array);
@@ -15,7 +7,7 @@ function generateRandomIV() {
 function arrayBufferToBase64(buf) {
     const bytes = new Uint8Array(buf);
     const binary = Array.from(bytes, byte => String.fromCharCode(byte)).join('');
-    return btoa(binary);
+    return window.btoa(binary);
 }
 
 function structureToBase64(arr) {
@@ -107,7 +99,7 @@ async function getScriptElementAndMinifyJs(fileName) {
 
 async function getSvgDataUrl(imagePath) {
     const image = await loadExternalFile(imagePath);
-    const imageBase64 = btoa(image);
+    const imageBase64 = window.btoa(image);
     return `data:image/svg+xml;base64,${imageBase64}`;
 }
 
@@ -142,6 +134,7 @@ async function generateBookmarklet() {
 
     appendChild(bookmarkletHead, await getCssElement('bookmarklet.min.css'));
     appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('decrypt.js'));
+    appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('derive-key.js'));
     appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('lib/aes-lib.js'));
     appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('lib/forge-sha256.js'));
     if (isMarkdown(content)) {
