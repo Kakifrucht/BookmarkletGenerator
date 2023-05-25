@@ -119,7 +119,7 @@ async function generateBookmarklet() {
 
     const password = document.getElementById('password').value;
 
-    const bookmarkletTemplate = await loadExternalFile('bookmarklet-template.html');
+    const bookmarkletTemplate = await loadExternalFile('bookmarklet.html');
     const bookmarkletParsed = new DOMParser().parseFromString(bookmarkletTemplate, 'text/html');
     const bookmarkletHead = bookmarkletParsed.head;
     bookmarkletParsed.getElementById('open-generator-button').href = window.location.href;
