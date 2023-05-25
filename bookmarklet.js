@@ -143,7 +143,8 @@ function decryptAndOpen() {
 
     const isHeadingOrText = el => /^(H[1-6]|P)$/.test(el.tagName.toUpperCase());
     const firstChild = document.getElementById('content').firstChild;
-    document.title = firstChild.tagName !== undefined && isHeadingOrText(firstChild) ? firstChild.innerHTML : 'Decrypted Message';
+    const firstChildNoTags = firstChild.innerHTML.replace(/<[^>]*>/g, '');
+    document.title = firstChild.tagName !== undefined && isHeadingOrText(firstChild) ? firstChildNoTags : 'Decrypted Message';
 }
 
 function copyToClipboard() {

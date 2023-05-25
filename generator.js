@@ -133,7 +133,7 @@ async function generateBookmarklet() {
     bookmarkletParsed.getElementById('generator-icon').src = await getSvgDataUrl('svg/generator-icon.svg');
 
     appendChild(bookmarkletHead, await getCssElement('bookmarklet.min.css'));
-    appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('decrypt.js'));
+    appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('bookmarklet.js'));
     appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('derive-key.js'));
     appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('lib/aes-lib.js'));
     appendChild(bookmarkletHead, await getScriptElementAndMinifyJs('lib/forge-sha256.js'));
