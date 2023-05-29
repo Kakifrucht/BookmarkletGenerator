@@ -1,5 +1,6 @@
 body {
     padding-inline: 1rem;
+    margin: 0;
     font-family: system-ui, -apple-system, 'Segoe UI', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji';
 }
 
