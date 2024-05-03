@@ -166,11 +166,19 @@ function registerListeners() {
         }
     });
     document.addEventListener('keydown', e => {
-        if (e.key !== 'Enter') return;
-        if (e.target.matches('#password')) {
-            decryptAndOpen();
-        } else if (passwordPrompt.error) {
-            resetPrompt(promptElement);
+        const passwordElement = document.getElementById('password');
+        if (e.key === 'Tab' && !e.target.matches('#password') && passwordElement) {
+            e.preventDefault();
+            passwordElement.focus();
+            return;
+        }
+
+        if (e.key === 'Enter') {
+            if (e.target.matches('#password')) {
+                decryptAndOpen();
+            } else if (passwordPrompt.error) {
+                resetPrompt(promptElement);
+            }
         }
     });
     document.getElementById('copy-button').addEventListener('click', () => {
