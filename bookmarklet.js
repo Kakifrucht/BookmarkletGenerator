@@ -68,9 +68,16 @@ function decompress(data) {
     return new TextDecoder().decode(decompressedData).replace(/\0/g, '');
 }
 
-const urlRegex = /https?:\/\/(?:(\w+:\w+)@)?(?:www\.|(?!www)[a-zA-Z0-9-]+(\.)?)[a-zA-Z0-9@:%_+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+~#?&=./]*)/g;
 function isValidURL(str) {
-    return str.split(" ").length === 1 && !str.includes("\n") && str.match(urlRegex) !== null;
+    if (str.split(" ").length !== 1 || str.includes("\n")) {
+        return false;
+    }
+    try {
+        new URL(str);
+        return true;
+    } catch (_) {
+        return false;
+    }
 }
 
 function parseSimple(str) {
@@ -81,17 +88,22 @@ function parseSimple(str) {
         clickableText = clickableText.replaceAll('\n', '<br>');
     }
 
-    let matches = Array.from(clickableText.matchAll(urlRegex));
-    matches = matches.filter((match) => {
-        const index = match.index;
+    // Split the text by spaces and <br> tags while preserving them
+    let words = clickableText.split(/(\s+|<br>)/);
+    words = words.map((word) => {
+        if (!isValidURL(word)) {
+            return word;
+        }
+
+        const index = clickableText.indexOf(word);
         const prevStringHref = clickableText.substr(index - 6, 6);
         const prevStringSrc = clickableText.substr(index - 5, 5);
-        return (index === 0 || prevStringHref !== 'href="') && (index === 0 || prevStringSrc !== 'src="');
+        if ((index === 0 || prevStringHref !== 'href="') && (index === 0 || prevStringSrc !== 'src="')) {
+            return `<a href="${word}">${word}</a>`;
+        }
     });
-    matches.forEach((match) => {
-        const url = match[0];
-        clickableText = clickableText.replace(url, `<a href="${url}">${url}</a>`);
-    });
+
+    clickableText = words.join('');
     return clickableText;
 }
 
